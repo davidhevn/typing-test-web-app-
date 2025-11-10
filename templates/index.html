@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>typing test</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      typing<span class="logo-accent">test</span>
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn" id="btn-theme" title="Theme">☀</button>
+      <button class="icon-btn" id="btn-info" title="Info">ⓘ</button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container">
+    <!-- Options -->
+    <div class="options">
+      <div class="option-group">
+        <span class="option-label">@</span>
+        <button class="option-btn" data-opt="punctuation">punctuation</button>
+      </div>
+      <div class="option-group">
+        <span class="option-label">#</span>
+        <button class="option-btn" data-opt="numbers">numbers</button>
+      </div>
+      <span class="divider"></span>
+      <div class="option-group">
+        <button class="option-btn active" data-mode="time">time</button>
+        <button class="option-btn" data-mode="words">words</button>
+        <button class="option-btn" data-mode="quote">quote</button>
+        <button class="option-btn" data-mode="custom">custom</button>
+      </div>
+      <span class="divider"></span>
+      <div class="option-group" id="time-options">
+        <button class="option-btn" data-time="15">15</button>
+        <button class="option-btn active" data-time="30">30</button>
+        <button class="option-btn" data-time="60">60</button>
+        <button class="option-btn" data-time="120">120</button>
+      </div>
+      <div class="option-group" id="words-options" style="display:none;">
+        <button class="option-btn" data-words="10">10</button>
+        <button class="option-btn" data-words="25">25</button>
+        <button class="option-btn active" data-words="50">50</button>
+        <button class="option-btn" data-words="100">100</button>
+      </div>
+    </div>
+
+    <!-- Typing Area -->
+    <div class="typing-area" id="typingArea" tabindex="0">
+      <svg class="led-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="ledGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#ff0040"/>
+            <stop offset="20%" stop-color="#ff7a00"/>
+            <stop offset="40%" stop-color="#ffee00"/>
+            <stop offset="60%" stop-color="#33ff00"/>
+            <stop offset="80%" stop-color="#00ffee"/>
+            <stop offset="100%" stop-color="#0066ff"/>
+          </linearGradient>
+        </defs>
+        <rect class="led-rect" x="1.5" y="1.5" width="97" height="97" rx="8" ry="8"
+              fill="none" stroke="url(#ledGradient)" stroke-width="3"
+              vector-effect="non-scaling-stroke" pathLength="1000"/>
+      </svg>
+      <div class="focus-message">Click here to focus</div>
+      <div id="caret" class="caret"></div>
+      <div id="text" class="text"></div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-label">wpm</div>
+        <div class="stat-value" id="wpm">0</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">accuracy</div>
+        <div class="stat-value" id="accuracy">100%</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">errors</div>
+        <div class="stat-value" id="errors">0</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">time</div>
+        <div class="stat-value" id="time">30</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Result Modal -->
+  <div id="resultModal" class="result-modal" aria-hidden="true">
+    <div class="result-card">
+      <div class="result-title">result</div>
+      <div class="result-grid">
+        <div class="result-item">
+          <div class="result-label">wpm</div>
+          <div class="result-value" id="resWpm">0</div>
+        </div>
+        <div class="result-item">
+          <div class="result-label">accuracy</div>
+          <div class="result-value" id="resAcc">0%</div>
+        </div>
+        <div class="result-item">
+          <div class="result-label">errors</div>
+          <div class="result-value" id="resErr">0</div>
+        </div>
+        <div class="result-item">
+          <div class="result-label">time</div>
+          <div class="result-value" id="resTime">0s</div>
+        </div>
+      </div>
+      <div class="result-actions">
+        <button id="btnRestart" class="option-btn active">restart (Tab)</button>
+        <button id="btnClose" class="option-btn">close (Esc)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Text Modal -->
+  <div id="inputModal" class="result-modal" aria-hidden="true">
+    <div class="result-card" style="gap:1.5rem; align-items:stretch;">
+      <div class="result-title">custom text</div>
+      <textarea id="customText" class="custom-textarea" placeholder="Paste or type the text you want to practice..."></textarea>
+      <div class="result-actions">
+        <button id="btnCustomOk" class="option-btn active">ok</button>
+        <button id="btnCustomClose" class="option-btn">cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    Press Tab + Enter to quickly restart
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
